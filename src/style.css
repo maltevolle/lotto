@@ -1,0 +1,19 @@
+.lotto-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.lotto-number {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.lotto-number.selected {
+  background-color: #007bff;
+  color: #fff;
+}
