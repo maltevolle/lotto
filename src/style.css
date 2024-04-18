@@ -1,19 +1,26 @@
-.lotto-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    grid-gap: 10px;
 }
 
-.lotto-number {
-  width: 30px;
-  height: 30px;
-  border: 1px solid #ccc;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 50px);
+    grid-gap: 5px;
 }
 
-.lotto-number.selected {
-  background-color: #007bff;
-  color: #fff;
+.input-grid {
+    display: grid;
+    width: 200px;
+    height: 50px;
+}
+
+.submit-grid {
+    display: grid;
+    width: 200px;
+    height: 50px;
 }
