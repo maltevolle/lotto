@@ -24,3 +24,7 @@
     width: 200px;
     height: 50px;
 }
+
+.selected {
+    background-color: blue; /* Ändere die Farbe nach deinen Wünschen */
+}

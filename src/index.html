@@ -6,24 +6,25 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="app" class="container">
-        <div class="button-grid">
-            <button
-                    v-for="number in buttonNumbers"
-                    :key="number"
-                    @click="handleButtonClick(number)"
-            >
-                {{ number }}
-            </button>
+<div id="app" class="container">
+    <div class="button-grid">
+        <button
+                v-for="number in buttonNumbers"
+                :key="number"
+                @click="handleButtonClick(number)"
+                :class="{ 'selected': selectedNumbers.includes(number) }"
+        >
+            {{ number }}
+        </button>
     </div>
-        <div class="input-grid">
-            <input type="text" v-model="inputValue" placeholder="Eingabe...">
-        </div>
-        <div class="submit-grid">
-            <button @click="submitForm">Absenden</button>
-        </div>
+    <div class="input-grid">
+        <input type="text" v-model="inputValue" placeholder="Eingabe...">
     </div>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="app.js"></script>
+    <div class="submit-grid">
+        <button @click="submitForm">Absenden</button>
+    </div>
+</div>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
