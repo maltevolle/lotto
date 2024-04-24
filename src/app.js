@@ -36,8 +36,21 @@ const app = Vue.createApp({
             } else
             {
                 console.log("Ausgewählte Zahlen:", this.selectedNumbers); // Ausgabe der ausgewählten Zahlen
+                sendDataToFastAPI(selectedNumbers);
             }
-        }
+        },
+        sendDataToFastAPI(data) {
+            var xhr = new XMLHttpRequest();
+            var url = 'http://localhost:8000/'; // URL entsprechend deinem FastAPI-Endpunkt
+            xhr.open('POST', url, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log(xhr.responseText); // Antwort anzeigen (optional)
+                }
+            };
+            xhr.send(JSON.stringify(data));
+        },
     },
     mounted() {
         // Fülle das Array mit den Zahlen von 1 bis 49
