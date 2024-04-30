@@ -36,7 +36,7 @@ const app = Vue.createApp({
             } else
             {
                 console.log("Ausgewählte Zahlen:", this.selectedNumbers); // Ausgabe der ausgewählten Zahlen
-                sendDataToFastAPI(selectedNumbers);
+                this.sendDataToFastAPI(this.selectedNumbers); // Aufruf der Funktion mit 'this'
             }
         },
         sendDataToFastAPI(data) {
