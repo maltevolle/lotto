@@ -39,17 +39,24 @@ const app = Vue.createApp({
                 this.sendDataToFastAPI(this.selectedNumbers); // Aufruf der Funktion mit 'this'
             }
         },
-        sendDataToFastAPI(data) {
-            var xhr = new XMLHttpRequest();
-            var url = 'http://localhost:8000/'; // URL entsprechend deinem FastAPI-Endpunkt
-            xhr.open('POST', url, true);
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    console.log(xhr.responseText); // Antwort anzeigen (optional)
+        async sendDataToFastAPI(data) {
+            try {
+                const response = await fetch('http://localhost:8000/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                if (response.ok) {
+                    const responseData = await response.json();
+                    console.log(responseData); // Antwort anzeigen (optional)
+                } else {
+                    console.error('Fehler beim Senden der Daten:', response.statusText);
                 }
-            };
-            xhr.send(JSON.stringify(data));
+            } catch (error) {
+                console.error('Netzwerkfehler:', error);
+            }
         },
     },
     mounted() {

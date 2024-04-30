@@ -33,5 +33,6 @@ class Database:
         self.engine = engine
         self.Session = sessionmaker(bind=self.engine)
 
-    def get_session(self        return self.Session()
+    def get_session(self):
+            return self.Session()
 
