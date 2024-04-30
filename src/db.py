@@ -28,15 +28,10 @@ class Entry(Base):
 engine = create_engine("sqlite:///mydb.db", echo=True)
 Base.metadata.create_all(bind=engine)
 
-#Session = sessionmaker(bind=engine)
-#session = Session()
-#e1 = Entry(4, 22, datetime.now())
-#session.add(e1)
-#session.commit()
+class Database:
+    def __init__(self):
+        self.engine = engine
+        self.Session = sessionmaker(bind=self.engine)
 
-#results = session.query(Entry).all()
-#for entry in results:
-#    print("ID:", entry.id)
-#   print("Selected Numbers:", entry.selectedNumbers)
-#   print("Timestamp:", entry.timestamp)
-#   print()
+    def get_session(self        return self.Session()
+
