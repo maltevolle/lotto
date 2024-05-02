@@ -1,6 +1,7 @@
 from fastapi import Depends
 from db import Database, Entry
 
+
 class API:
     def __init__(self, database):
         self.database = database

@@ -36,17 +36,13 @@ const app = Vue.createApp({
             }
             else
             {
-                const postData = {
-                    selectedNumbers: this.selectedNumbers,
-                    inputValue: this.inputValue
-                };
                 // HTTP-POST-Anfrage senden
                 fetch('http://localhost:8000/selected_numbers', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(postData)
+                    body: JSON.stringify(this.selectedNumbers, this.inputValue)
                 })
                     .then(response => {
                         if (!response.ok) {
