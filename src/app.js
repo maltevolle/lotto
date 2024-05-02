@@ -43,8 +43,11 @@ const app = Vue.createApp({
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(this.selectedNumbers, this.inputText)
-                })
+                    body: JSON.stringify({
+                        selectedNumbers: this.selectedNumbers,
+                        inputText: this.inputText
+                    })
+                    })
                     .then(response => {
                         if (!response.ok) {
                             throw new Error('Fehler beim Senden an den Server');
