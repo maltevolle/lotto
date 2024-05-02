@@ -7,6 +7,14 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 database = Database()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],  # Erlauben Sie OPTIONS-Anfragen
+    allow_headers=["*"],
+)
+
 @app.get('/')
 
 @app.post('/')
