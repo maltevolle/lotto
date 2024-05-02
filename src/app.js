@@ -2,7 +2,7 @@ const app = Vue.createApp({
     data() {
         return {
             buttonNumbers: [],
-            selectedNumbers: [], // Array, um die ausgewählten Zahlen zu speichern
+            selectedNumbers: [],
             inputText: ''
         };
     },

@@ -7,14 +7,6 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 database = Database()
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],  # Erlauben Sie OPTIONS-Anfragen
-    allow_headers=["*"],
-)
-
 @app.get('/')
 
 @app.post('/')
@@ -24,7 +16,5 @@ async def receive_selected_numbers(selected_numbers_and_text: dict):
 
     message = f"Ausgewählte Zahlen erhalten: {selected_numbers}, Input-Wert: {input_text}"
     print(message)
-    # Hier kannst du input_text verwenden, wie du möchtest
-
-    # database.save_selected_numbers_and_text(selected_numbers, input_text)
+    database.save_selected_numbers_and_text(selected_numbers, input_text)
     return {"message": message}
