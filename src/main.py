@@ -18,6 +18,7 @@ app.add_middleware(
 @app.get('/')
 
 @app.post('/selected_numbers')
-async def receive_selected_numbers(selected_numbers: List[int]):
-    # Hier kannst du die ausgewählten Zahlen verarbeiten, z.B. in der Datenbank speichern
-    return {"message": "Ausgewählte Zahlen erhalten"}
+async def receive_selected_numbers(selected_numbers: List[int], input_value: str):
+    # Hier kannst du die ausgewählten Zahlen und den Input-Text verarbeiten, z.B. in der Datenbank speichern
+    message = f"Ausgewählte Zahlen erhalten: {selected_numbers}, Input-Wert: {input_value}"
+    return {"message": message}
