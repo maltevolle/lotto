@@ -1,3 +1,4 @@
+from typing import List
 from fastapi import FastAPI, HTTPException, Depends
 from pydantic import BaseModel
 from db import Base, Entry, engine, Database
@@ -14,10 +15,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get('/')
 
-@app.post('/')
-async def create_item(selectedNumbers, input_text, db=Depends(database.get_session)):
-    entry = Entry(selectedNumbers, input_text)
-    db.add(entry)
-    db.commit()
-    return {"message": "Items created successfully"}
+@app.post('/selected_numbers')
+async def receive_selected_numbers(selected_numbers: List[int]):
+    # Hier kannst du die ausgewählten Zahlen verarbeiten, z.B. in der Datenbank speichern
+    return {"message": "Ausgewählte Zahlen erhalten"}

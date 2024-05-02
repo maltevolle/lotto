@@ -30,32 +30,31 @@ const app = Vue.createApp({
             }
         },
         submitForm() {
-            if(this.selectedNumbers.length < 6)
-            {
+            if (this.selectedNumbers.length < 6) {
                 console.log("Zu wenig Zahlen ausgewählt!"); // Ausgabe der ausgewählten Zahlen
-            } else
-            {
-                console.log("Ausgewählte Zahlen:", this.selectedNumbers); // Ausgabe der ausgewählten Zahlen
-                this.sendDataToFastAPI(this.selectedNumbers); // Aufruf der Funktion mit 'this'
             }
-        },
-        async sendDataToFastAPI(data) {
-            try {
-                const response = await fetch('http://localhost:8000/', {
+            else
+            {
+                // HTTP-POST-Anfrage senden
+                fetch('http://localhost:8000/selected_numbers', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(data)
-                });
-                if (response.ok) {
-                    const responseData = await response.json();
-                    console.log(responseData); // Antwort anzeigen (optional)
-                } else {
-                    console.error('Fehler beim Senden der Daten:', response.statusText);
-                }
-            } catch (error) {
-                console.error('Netzwerkfehler:', error);
+                    body: JSON.stringify(this.selectedNumbers)
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Fehler beim Senden an den Server');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log("Erfolgreich an den Server gesendet:", data);
+                    })
+                    .catch(error => {
+                        console.error("Fehler beim Senden an den Server:", error);
+                    });
             }
         },
     },
