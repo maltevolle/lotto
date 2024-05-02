@@ -3,7 +3,7 @@ const app = Vue.createApp({
         return {
             buttonNumbers: [],
             selectedNumbers: [], // Array, um die ausgewählten Zahlen zu speichern
-            inputValue: ''
+            inputText: ''
         };
     },
     methods: {
@@ -36,13 +36,14 @@ const app = Vue.createApp({
             }
             else
             {
+                this.inputText = this.inputValue
                 // HTTP-POST-Anfrage senden
-                fetch('http://localhost:8000/selected_numbers', {
+                fetch('http://localhost:8000', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(this.selectedNumbers, this.inputValue)
+                    body: JSON.stringify(this.selectedNumbers, this.inputText)
                 })
                     .then(response => {
                         if (!response.ok) {
