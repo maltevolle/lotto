@@ -9,24 +9,19 @@ Base = declarative_base()
 class Entry(Base):
     __tablename__ = "entries"
 
-    id = Column(Integer, primary_key=True)
-    number1 = Column(Integer)
-    number2 = Column(Integer)
-    number3 = Column(Integer)
-    number4 = Column(Integer)
-    number5 = Column(Integer)
-    number6 = Column(Integer)
+    identifier = Column(Integer, primary_key=True, autoincrement=True)
+    selectedNumbers = Column(String)
     timestamp = Column(DateTime, default=datetime.utcnow)
     input_text = Column(String)
 
-    def __init__(self, id, selectedNumbers, timestamp):
-        self.id = id
+    def __init__(self, selectedNumbers: String, input_text):
         self.selectedNumbers = selectedNumbers
-        self.timestamp = timestamp
+        self.input_text = input_text
 
 
 engine = create_engine("sqlite:///mydb.db", echo=True)
 Base.metadata.create_all(bind=engine)
+
 
 class Database:
     def __init__(self):
@@ -34,5 +29,4 @@ class Database:
         self.Session = sessionmaker(bind=self.engine)
 
     def get_session(self):
-            return self.Session()
-
+        return self.Session()
