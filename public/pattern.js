@@ -1,7 +1,6 @@
 export function checkPattern(selectedNumbers) {
-    var dict = {
+    let dict = {
         "isEven": false
-
     }
     if (selectedNumbers.every(num => num % 2 === 0)){
         dict["isEven"] = true;
