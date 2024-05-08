@@ -1,3 +1,4 @@
+import { checkPattern } from './pattern.js';
 const app = Vue.createApp({
     data() {
         return {
@@ -36,6 +37,7 @@ const app = Vue.createApp({
             }
             else
             {
+                print(checkPattern(selectedNumbers));
                 this.inputText = this.inputValue
                 // HTTP-POST-Anfrage senden
                 fetch('http://localhost:8000', {
