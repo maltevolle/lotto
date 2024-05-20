@@ -1,24 +1,13 @@
 let dict = {
 }
 
-function createMatrix(rows, cols) {
-    const matrix = [];
-    for (let i = 0; i < rows; i++) {
-        matrix[i] = [];
-        for (let j = 0; j < cols; j++) {
-            matrix[i][j] = 0;
-        }
-    }
-    return matrix;
-}
-
-const matrix = createMatrix(7,7);
-
 export function checkPattern(selectedNumbers) {
     isEven(selectedNumbers);
     isDiagoanal(selectedNumbers);
-    atleastThreeAreNextToEachother(selectedNumbers)
+    atleastThreeAreNextToEachother(selectedNumbers);
+    atleastThreeAreStacked(selectedNumbers);
     isPrime(selectedNumbers);
+    areNumbersClose(selectedNumbers);
     return dict;
 }
 
@@ -67,6 +56,20 @@ function atleastThreeAreNextToEachother(selectedNumbers)
     return dict["atleastThreeAreNextToEachother"] = false;
 }
 
+function atleastThreeAreStacked(selectedNumbers)
+{
+    dict["atleastThreeAreStacked"] = false;
+    let copySelectedNumbers = selectedNumbers.slice();
+    copySelectedNumbers.sort((a, b) => a - b);
+    for (let i = 0; i <= copySelectedNumbers.length - 3; i++) {
+        if (copySelectedNumbers[i] + 7 === copySelectedNumbers[i + 1] && copySelectedNumbers[i + 1] + 7 === copySelectedNumbers[i + 2]) {
+            return dict["atleastThreeAreStacked"] = true;
+        }
+    }
+
+    return dict["atleastThreeAreStacked"] = false;
+}
+
 function isPrime(selectedNumbers)
 {
     dict["isPrime"] = [false, 0];
@@ -91,3 +94,56 @@ function isPrime(selectedNumbers)
     return dict["isPrime"] = [primeCount > 0, primeCount];
 }
 
+function areNumbersClose(selectedNumbers) {
+    dict["areNumbersClose"] = false;
+
+    // 7x7 Feld erstellen
+    const field = Array.from({ length: 7 }, () => Array(7).fill(false));
+
+    // Funktion, um die Position einer Zahl im 7x7-Feld zu berechnen
+    function getPosition(number) {
+        const row = Math.floor((number - 1) / 7);
+        const col = (number - 1) % 7;
+        return [row, col];
+    }
+
+    // Die ausgewählten Zahlen im Feld markieren
+    selectedNumbers.forEach(num => {
+        const [row, col] = getPosition(num);
+        field[row][col] = true;
+    });
+
+    // Hilfsfunktion für die Tiefensuche (DFS)
+    function dfs(row, col, visited) {
+        const directions = [
+            [0, 1], [1, 0], [0, -1], [-1, 0]  // rechts, unten, links, oben
+        ];
+
+        visited[row][col] = true;
+
+        for (const [dx, dy] of directions) {
+            const newRow = row + dx;
+            const newCol = col + dy;
+
+            if (newRow >= 0 && newRow < 7 && newCol >= 0 && newCol < 7 &&
+                field[newRow][newCol] && !visited[newRow][newCol]) {
+                dfs(newRow, newCol, visited);
+            }
+        }
+    }
+
+    // Tiefensuche von der ersten ausgewählten Zahl starten
+    const visited = Array.from({ length: 7 }, () => Array(7).fill(false));
+    const [startRow, startCol] = getPosition(selectedNumbers[0]);
+    dfs(startRow, startCol, visited);
+
+    // Prüfen, ob alle ausgewählten Zahlen besucht wurden
+    for (const num of selectedNumbers) {
+        const [row, col] = getPosition(num);
+        if (!visited[row][col]) {
+            return dict["areNumbersClose"] = false;
+        }
+    }
+
+    return dict["areNumbersClose"] = true;
+}
