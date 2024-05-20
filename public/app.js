@@ -5,7 +5,9 @@ const app = Vue.createApp({
         return {
             buttonNumbers: [],
             selectedNumbers: [],
-            inputText: ''
+            inputValue: '',
+            inputText: '',
+            message: '' // Neue Variable für die Nachrichten
         };
     },
     methods: {
@@ -17,9 +19,10 @@ const app = Vue.createApp({
                     // Wenn die Zahl bereits ausgewählt wurde, entferne sie aus dem Array
                     const index = this.selectedNumbers.indexOf(number);
                     this.selectedNumbers.splice(index, 1);
+                    this.message = ''; // Zurücksetzen der Nachricht, falls eine vorherige Meldung angezeigt wurde
                 } else {
                     // Ansonsten informiere den Benutzer, dass er nicht mehr als 6 Buttons auswählen kann
-                    console.log("Sie können nicht mehr als 6 Buttons auswählen.");
+                    this.message = "Sie können nicht mehr als 6 Buttons auswählen.";
                 }
             } else {
                 // Füge die ausgewählte Zahl zum Array hinzu
@@ -27,19 +30,19 @@ const app = Vue.createApp({
                     // Wenn die Zahl bereits ausgewählt wurde, entferne sie aus dem Array
                     const index = this.selectedNumbers.indexOf(number);
                     this.selectedNumbers.splice(index, 1);
+                    this.message = ''; // Zurücksetzen der Nachricht, falls eine vorherige Meldung angezeigt wurde
                 } else {
                     this.selectedNumbers.push(number);
+                    this.message = ''; // Zurücksetzen der Nachricht, falls eine vorherige Meldung angezeigt wurde
                 }
             }
         },
         submitForm() {
             if (this.selectedNumbers.length < 6) {
-                console.log("Zu wenig Zahlen ausgewählt!"); // Ausgabe der ausgewählten Zahlen
-            }
-            else
-            {
-                console.log(checkPattern(this.selectedNumbers));
-                this.inputText = this.inputValue
+                this.message = "Zu wenig Zahlen ausgewählt!";
+            } else {
+                this.message = ''; // Zurücksetzen der Nachricht, falls eine vorherige Meldung angezeigt wurde
+                this.inputText = this.inputValue;
                 // HTTP-POST-Anfrage senden
                 fetch('http://localhost:8000', {
                     method: 'POST',
@@ -50,19 +53,19 @@ const app = Vue.createApp({
                         selectedNumbers: this.selectedNumbers,
                         inputText: this.inputText
                     })
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Fehler beim Senden an den Server');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        console.log("Erfolgreich an den Server gesendet:", data);
-                    })
-                    .catch(error => {
-                        console.error("Fehler beim Senden an den Server:", error);
-                    });
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Fehler beim Senden an den Server');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    this.message = "Die Zahlen wurden erfolgreich an den Server gesendet!";
+                })
+                .catch(error => {
+                    this.message = "Fehler beim Senden an den Server: " + error.message;
+                });
             }
         },
     },
