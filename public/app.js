@@ -43,6 +43,7 @@ const app = Vue.createApp({
             } else {
                 this.message = ''; // Zurücksetzen der Nachricht, falls eine vorherige Meldung angezeigt wurde
                 this.inputText = this.inputValue;
+                console.log(checkPattern(this.selectedNumbers));
                 // HTTP-POST-Anfrage senden
                 fetch('http://localhost:8000', {
                     method: 'POST',
