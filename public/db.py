@@ -15,11 +15,12 @@ class Entry(Base):
     selectedNumbers = Column(String)
     timestamp = Column(DateTime, default=datetime.utcnow)
     input_text = Column(String)
+    pattern = Column(String)
 
-    def __init__(self, selectedNumbers: str, input_text):
+    def __init__(self, selectedNumbers: str, input_text, pattern):
         self.selectedNumbers = selectedNumbers
         self.input_text = input_text
-
+        self.pattern = pattern
 
 engine = create_engine("sqlite:///mydb.db", echo=True)
 Base.metadata.create_all(bind=engine)
@@ -39,7 +40,8 @@ class Database:
         try:
             entry = Entry(
                 selectedNumbers=','.join(map(str, selected_numbers)),
-                input_text=input_value
+                input_text=input_value,
+                pattern = ','.join(map(str, pattern))
             )
             db.add(entry)
             db.commit()

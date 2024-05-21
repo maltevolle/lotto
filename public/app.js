@@ -8,7 +8,7 @@ const app = Vue.createApp({
             inputValue: '',
             inputText: '',
             message: '',
-            dict: {}
+            dict: ''
         };
     },
     methods: {
@@ -46,9 +46,9 @@ const app = Vue.createApp({
                 this.message = ''; // Zurücksetzen der Nachricht, falls eine vorherige Meldung angezeigt wurde
                 this.inputText = this.inputValue;
                 this.dict = checkPattern(this.selectedNumbers);
-                console.log(checkPattern(this.selectedNumbers));
+                console.log(this.dict);
                 // HTTP-POST-Anfrage senden
-                fetch('http://localhost:8000', {
+                fetch('http://localhost:8001', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

@@ -8,7 +8,7 @@ export function checkPattern(selectedNumbers) {
     atleastThreeAreStacked(selectedNumbers);
     isPrime(selectedNumbers);
     areNumbersClose(selectedNumbers);
-    return dict;
+    return Object.entries(dict);
 }
 
 function isEven(selectedNumbers)
