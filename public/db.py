@@ -34,7 +34,7 @@ class Database:
     def get_session(self):
         return self.Session()
 
-    def save_selected_numbers_and_text(self, selected_numbers, input_value):
+    def save_submittedinfo(self, selected_numbers, input_value, pattern):
         db = self.get_session()
         try:
             entry = Entry(

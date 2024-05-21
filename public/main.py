@@ -18,11 +18,12 @@ app.add_middleware(
 @app.get('/')
 
 @app.post('/')
-async def receive_selected_numbers(selected_numbers_and_text: dict):
-    selected_numbers = selected_numbers_and_text.get('selectedNumbers')
-    input_text = selected_numbers_and_text.get('inputText')
+async def receive_selected_numbers(submittedinfo: dict):
+    selected_numbers = submittedinfo.get('selectedNumbers')
+    input_text = submittedinfo.get('inputText')
+    pattern = submittedinfo.get('dict')
 
-    message = f"Ausgewählte Zahlen erhalten: {selected_numbers}, Input-Wert: {input_text}"
+    message = f"Ausgewählte Zahlen erhalten: {selected_numbers}, Input-Wert: {input_text}, Pattern: {pattern}"
     print(message)
-    database.save_selected_numbers_and_text(selected_numbers, input_text)
+    database.save_submittedinfo(selected_numbers, input_text, pattern)
     return {"message": message}

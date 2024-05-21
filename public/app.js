@@ -7,7 +7,8 @@ const app = Vue.createApp({
             selectedNumbers: [],
             inputValue: '',
             inputText: '',
-            message: '' // Neue Variable für die Nachrichten
+            message: '',
+            dict: {}
         };
     },
     methods: {
@@ -28,7 +29,8 @@ const app = Vue.createApp({
                 // Füge die ausgewählte Zahl zum Array hinzu
                 if (this.selectedNumbers.includes(number)) {
                     // Wenn die Zahl bereits ausgewählt wurde, entferne sie aus dem Array
-                    const index = this.selectedNumbers.indexOf(number);
+                    const index = this
+                        .selectedNumbers.indexOf(number);
                     this.selectedNumbers.splice(index, 1);
                     this.message = ''; // Zurücksetzen der Nachricht, falls eine vorherige Meldung angezeigt wurde
                 } else {
@@ -43,6 +45,7 @@ const app = Vue.createApp({
             } else {
                 this.message = ''; // Zurücksetzen der Nachricht, falls eine vorherige Meldung angezeigt wurde
                 this.inputText = this.inputValue;
+                this.dict = checkPattern(this.selectedNumbers);
                 console.log(checkPattern(this.selectedNumbers));
                 // HTTP-POST-Anfrage senden
                 fetch('http://localhost:8000', {
@@ -52,7 +55,8 @@ const app = Vue.createApp({
                     },
                     body: JSON.stringify({
                         selectedNumbers: this.selectedNumbers,
-                        inputText: this.inputText
+                        inputText: this.inputText,
+                        dict: this.dict
                     })
                 })
                 .then(response => {
