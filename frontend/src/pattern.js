@@ -3,7 +3,7 @@ let dict = {
 
 export function checkPattern(selectedNumbers) {
     isEven(selectedNumbers);
-    isDiagoanal(selectedNumbers);
+    isDiagonal(selectedNumbers);
     atleastThreeAreNextToEachother(selectedNumbers);
     atleastThreeAreStacked(selectedNumbers);
     isPrime(selectedNumbers);
@@ -17,7 +17,7 @@ function isEven(selectedNumbers)
     dict["isEven"] = !!selectedNumbers.every(num => num % 2 === 0);
 }
 
-function isDiagoanal(selectedNumbers)
+function isDiagonal(selectedNumbers)
 {
     dict["isDiagonal"] = false;
     let copySelectedNumbers = selectedNumbers.slice();
