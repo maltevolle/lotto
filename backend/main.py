@@ -20,11 +20,11 @@ app.add_middleware(
 )
 
 # Serve static files
-app.mount("/", StaticFiles(directory=Path(__file__).parent / "frontend"), name="static")
+app.mount("/static", StaticFiles(directory=Path(__file__).parent / "frontend" / "public"), name="static")
 
 @app.get("/")
 async def read_root():
-    return FileResponse(Path(__file__).parent.parent / "frontend" / "public" / "index.html")
+    return FileResponse(Path(__file__).parent / "frontend" / "public" / "index.html")
 
 @app.get("/favicon.ico")
 async def favicon():
