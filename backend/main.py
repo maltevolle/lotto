@@ -20,7 +20,7 @@ app.add_middleware(
 )
 
 # Serve static files
-app.mount("/static", StaticFiles(directory=Path(__file__).parent.parent / "frontend" / "public"), name="static")
+app.mount("/", StaticFiles(directory=Path(__file__).parent.parent / "frontend/public"), name="static")
 
 @app.get("/")
 async def read_root():
