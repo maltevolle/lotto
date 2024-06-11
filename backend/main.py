@@ -19,8 +19,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Serve static files
-app.mount("/static", StaticFiles(directory=Path(__file__).parent.parent / "static"), name="static")
+# Mount the frontend static files directory
+app.mount("/static", StaticFiles(directory=Path(__file__).parent / "frontend" / "public"), name="static")
 
 @app.get("/")
 async def read_root():
