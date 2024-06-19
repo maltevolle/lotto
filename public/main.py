@@ -1,11 +1,8 @@
 from typing import List
 from fastapi import FastAPI, HTTPException, Depends
 from pydantic import BaseModel
-<<<<<<< HEAD
 from starlette.responses import FileResponse
 
-=======
->>>>>>> origin/master
 from db import Base, Entry, engine, Database
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -20,13 +17,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-<<<<<<< HEAD
 @app.get("/")
 async def read_root():
     return FileResponse('index.html')
-=======
-@app.get('/')
->>>>>>> origin/master
 
 @app.post('/')
 async def receive_selected_numbers(submittedinfo: dict):
