@@ -48,7 +48,7 @@ const app = Vue.createApp({
                 this.dict = checkPattern(this.selectedNumbers);
                 console.log(this.dict);
                 // HTTP-POST-Anfrage senden
-                fetch('https://localhost:8000/', {
+                fetch('', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
