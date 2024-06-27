@@ -85,7 +85,7 @@ const app = Vue.createApp({
                 this.patternMessages = this.generatePatternMessages();
                 console.log(this.dict);
                 // HTTP-POST-Anfrage senden
-                fetch('http://localhost:8000/api/submitForm', {
+                fetch('/api/submitForm', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -159,7 +159,7 @@ const app = Vue.createApp({
         },
         requestData() {
             this.message = "Daten werden abgerufen...";
-            fetch('http://localhost:8000/csv')
+            fetch('/csv')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Fehler beim Abrufen der Daten');
