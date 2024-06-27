@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="overlay" class="overlay">
+    <div class="overlay-content">
+        <h2>Willkommen zur Lotto-Web-App</h2>
+        <p>
+            Wähle zunächst sechs Zahlen aus. <br><br>
+            Gebe nun optional noch eine Begründung für deine Auswahl im Eingabefeld an. <br><br>
+            Klicke abschließend auf das Absendefeld. <br>
+        </p>
+        <button onclick="hideOverlay()">Weiter</button>
+    </div>
+</div>
+
+<div id="app" class="container">
+    <div class="title">Lotto</div>
+    <div class="button-grid">
+        <button
+                v-for="number in buttonNumbers"
+                :key="number"
+                @click="handleButtonClick(number)"
+                :class="{ 'selected': selectedNumbers.includes(number) }"
+        >
+            {{ number }}
+        </button>
+    </div>
+    <div class="input-grid">
+        <input type="text" v-model="inputValue" placeholder="Gebe hier eine Begründung für deine Auswahl an...">
+    </div>
+    <div class="submit-grid">
+        <button @click="submitForm">Absenden</button>
+        <div v-if="showToggle" class="toggle-container">
+            <label class="toggle-switch">
+                <input type="checkbox" v-model="showDict" :disabled="toggleDisabled">
+                <div class="toggle-switch-background">
+                    <div class="toggle-switch-handle"></div>
+                </div>
+            </label>
+            <span class="toggle-text">{{ toggleText }}</span>
+        </div>
+    </div>
+    <div class="message" :class="messageClass" v-if="message">{{ message }}</div>
+    <div class="pattern" v-if="patternMessages.length && showDict">
+        <h3>Erkannte Muster</h3>
+        <ul>
+            <li v-for="(message, index) in patternMessages" :key="index">{{ message }}</li>
+        </ul>
+    </div>
+
+        <button class="request-data-button" @click="showPasswordPrompt" title="Datenbank Download">
+            <img src="icons/database-download.svg" alt="Download">
+        </button>
+        <button class="help-button" onclick="showOverlay()" title="Hilfe">
+            <img src="icons/help.svg" alt="Hilfe">
+        </button>
+
+</div>
+
+<script src="vue.js"></script>
+<script type="module" src="app.js"></script>
+<script>
+    function hideOverlay() {
+        var overlay = document.getElementById("overlay");
+        overlay.style.display = "none";
+    }
+
+    function showOverlay() {
+        var overlay = document.getElementById("overlay");
+        overlay.style.display = "block";
+    }
+</script>
+</body>
+</html>

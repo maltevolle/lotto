@@ -1,0 +1,335 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f5f5f5;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 600px;
+}
+
+.title {
+    font-size: 40px;
+    font-weight: bold;
+    color: #4CAF50;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.button-grid button {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #4CAF50;
+    padding: 15px;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    width: 50px;
+    height: 50px;
+}
+
+.button-grid button:hover {
+    background-color: #e0e0e0;
+}
+
+.button-grid button:active {
+    background-color: #ccc;
+}
+
+.button-grid button.selected {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.input-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.input-grid input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 68%;
+    max-width: none;
+    box-sizing: border-box;
+}
+
+.submit-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}a
+
+.submit-grid button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    width: 158px;
+    padding: 10px 20px;
+    font-size: 28px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-align: center; /* Text zentrieren */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.submit-grid button:hover {
+    background-color: white;
+    color: #4CAF50;
+    border: 1px solid #ccc;
+}
+
+/* Abstand zwischen Button und Checkbox */
+.submit-grid .toggle-switch {
+    margin-left: 20px;
+}
+
+.message {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    max-width: 300px;
+}
+
+.message.success {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: #4CAF50;
+    border: 1px solid #4CAF50;
+}
+
+.message.error {
+    background-color: rgba(255, 99, 71, 0.1); /* Rote Hintergrundfarbe */
+    color: #ff6347; /* Roter Text */
+    border: 1px solid #ff6347; /* Roter Rahmen */
+}
+
+.pattern {
+    max-width: 65%;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+
+    .button-grid {
+        grid-template-columns: repeat(7, 1fr);
+    }
+
+    .button-grid button {
+        width: 50px;
+        height: 50px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .button-grid {
+        grid-template-columns: repeat(7, 1fr);
+    }
+
+    .button-grid button {
+        width: 35px;
+        height: 35px;
+        font-size: 12px;
+    }
+}
+
+.overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+.overlay.active {
+    display: flex;
+}
+
+.overlay-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.overlay-content h2 {
+    margin-top: 0;
+}
+
+.overlay-content button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-top: 10px;
+}
+
+.overlay-content button:hover {
+    background-color: white;
+    color: #4CAF50;
+    border: 1px solid #4CAF50;
+}
+
+/* CSS für die neue Checkbox */
+/* Vorherige Definitionen beibehalten */
+
+/* Anpassung des Toggle-Switch */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px; /* Neue Breite */
+    height: 25px; /* Neue Höhe */
+    cursor: pointer;
+    vertical-align: middle; /* Vertikale Ausrichtung */
+}
+
+.toggle-switch input[type="checkbox"] {
+    display: none;
+}
+
+.toggle-switch-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ddd;
+    border-radius: 20px;
+    box-shadow: inset 0 0 0 2px #ccc;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.toggle-switch-handle {
+    position: absolute;
+    top: 3px; /* Neue Positionierung */
+    left: 3px; /* Neue Positionierung */
+    width: 19px; /* Neue Breite */
+    height: 19px; /* Neue Höhe */
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.toggle-switch input[type="checkbox"]:checked + .toggle-switch-background {
+    background-color: #05c46b;
+    box-shadow: inset 0 0 0 2px #04b360;
+}
+
+.toggle-switch input[type="checkbox"]:checked + .toggle-switch-background .toggle-switch-handle {
+    transform: translateX(25px); /* Neue Verschiebung */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2), 0 0 0 3px #05c46b;
+}
+
+/* Neuer Text rechts neben dem Toggle-Switch */
+.toggle-container {
+    display: inline-flex;
+    align-items: center;
+    height: 50px; /* Höhe des "Absenden"-Buttons */
+    margin-left: 0px; /* Abstand zum "Absenden"-Button */
+}
+
+.toggle-text {
+    margin-left: 10px; /* Abstand zum Toggle-Switch */
+    font-size: 14px; /* Schriftgröße anpassen */
+    color: #4CAF50; /* Farbe anpassen */
+}
+
+/* Sicherstellen, dass der Toggle-Switch und der Text zusammen gut aussehen */
+.submit-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.submit-grid button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 28px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    height: 50px; /* Höhe anpassen */
+    line-height: 28px; /* Line-Height anpassen */
+}
+
+.submit-grid button:hover {
+    background-color: white;
+    color: #4CAF50;
+    border: 1px solid #ccc;
+}
+
+.request-data-button {
+    position: fixed;
+    bottom: 20px; /* Abstand vom unteren Rand der Seite */
+    right: 72px; /* Abstand vom rechten Rand der Seite */
+    z-index: 1000; /* Optional: Um sicherzustellen, dass der Button über anderen Elementen liegt */
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.request-data-button img{
+    width: 32px;
+    height: 32px;
+}
+/*help-button*/
+.help-button {
+    position: fixed;
+    bottom: 20px; /* Abstand vom unteren Rand der Seite */
+    right: 20px; /* Abstand vom rechten Rand der Seite */
+    z-index: 1000; /* Optional: Um sicherzustellen, dass der Button über anderen Elementen liegt */
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.help-button img {
+    width: 32px;
+    height: 32px;
+}
