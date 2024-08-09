@@ -1,0 +1,430 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f5f5f5;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 600px;
+}
+
+.title {
+    font-size: 40px;
+    font-weight: bold;
+    color: #4CAF50;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.button-grid button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #4CAF50;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    width: 50px;
+    height: 50px;
+}
+
+.button-grid button:hover {
+    background-color: #e0e0e0;
+}
+
+.button-grid button:active {
+    background-color: #ccc;
+}
+
+.button-grid button.selected {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.input-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    width: auto;
+    box-sizing: border-box;
+}
+
+.input-grid textarea {
+    resize: none;
+    padding: 10px;
+    font-size: 16px;
+    width: 100% ;
+    max-height: 100px;
+    height: 60px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow-y: auto;
+}
+
+.submit-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.submit-grid button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    width: 158px;
+    padding: 10px 20px;
+    font-size: 28px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.submit-grid button:hover {
+    background-color: white;
+    color: #4CAF50;
+    border: 1px solid #ccc;
+}
+
+.submit-grid .toggle-switch {
+    margin-left: 20px;
+}
+
+.message {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    max-width: 300px;
+}
+
+.message.success {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: #4CAF50;
+    border: 1px solid #4CAF50;
+}
+
+.message.error {
+    background-color: rgba(255, 99, 71, 0.1);
+    color: #ff6347;
+    border: 1px solid #ff6347;
+}
+
+.pattern {
+    max-width: 65%;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+
+    .button-grid {
+        grid-template-columns: repeat(7, 1fr);
+    }
+
+    .button-grid button {
+        width: 50px;
+        height: 50px;
+        font-size: 14px;
+    }
+
+    .input-grid input {
+        width: 400px;
+    }
+}
+
+@media (max-width: 480px) {
+    .button-grid {
+        grid-template-columns: repeat(7, 1fr);
+    }
+
+    .button-grid button {
+        width: 35px;
+        height: 35px;
+        font-size: 12px;
+    }
+
+    .input-grid input {
+        width: 300px;
+    }
+}
+
+.overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+.overlay.active {
+    display: flex;
+}
+
+.overlay-content {
+    font-size: 16px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.overlay-content h2 {
+    margin-top: 0;
+    font-size: 32px;
+    color: #4CAF50;
+}
+
+.overlay-content button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-top: 10px;
+}
+
+.overlay-content button:hover {
+    background-color: white;
+    color: #4CAF50;
+    border: 1px solid #4CAF50;
+}
+
+.hidden {
+    display: none;
+}
+
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.toggle-switch input[type="checkbox"] {
+    display: none;
+}
+
+.toggle-switch-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ddd;
+    border-radius: 20px;
+    box-shadow: inset 0 0 0 2px #ccc;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.toggle-switch-handle {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 19px;
+    height: 19px;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.toggle-switch input[type="checkbox"]:checked + .toggle-switch-background {
+    background-color: #05c46b;
+    box-shadow: inset 0 0 0 2px #04b360;
+}
+
+.toggle-switch input[type="checkbox"]:checked + .toggle-switch-background .toggle-switch-handle {
+    transform: translateX(25px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2), 0 0 0 3px #05c46b;
+}
+
+.toggle-container {
+    display: inline-flex;
+    align-items: center;
+    height: 50px;
+    margin-left: 0px;
+}
+
+.toggle-text {
+    margin-left: 10px;
+    font-size: 14px;
+    color: #4CAF50;
+}
+
+.submit-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.submit-grid button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 28px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    height: 50px;
+    line-height: 28px;
+}
+
+.submit-grid button:hover {
+    background-color: white;
+    color: #4CAF50;
+    border: 1px solid #ccc;
+}
+
+.request-data-button {
+    position: fixed;
+    bottom: 20px;
+    right: 72px;
+    z-index: 1000;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.request-data-button img{
+    width: 32px;
+    height: 32px;
+}
+/*help-button*/
+.help-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.help-button img {
+    width: 32px;
+    height: 32px;
+}
+
+.hilfe {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+.hilfe-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 90%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+}
+
+.hilfe-content h2 {
+    margin-top: 0;
+    text-align: center;
+    font-size: 32px;
+    color: #4CAF50;
+}
+
+.hilfe-content p {
+    margin: 20px 0;
+    line-height: 1.5;
+}
+.button-container-hilfe{
+    text-align: center;
+}
+
+.hilfe-content button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.hilfe-content button:hover {
+    background-color: white;
+    color: #4CAF50;
+    border: 1px solid #4CAF50;
+}
+
+.hilfe-content button:hover {
+    background-color: white;
+    color: #4CAF50;
+    border: 1px solid #4CAF50;
+}
+
+.step{
+    font-style: oblique;
+    text-align: left;
+    z-index: 10001;
+}
+
+.step-help{
+    font-style: oblique;
+    font-size: 16px;
+    text-align: left;
+    padding: 30px;
+    z-index: 10001;
+}
+

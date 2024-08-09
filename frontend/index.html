@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cache-control" content="no-cache" />
+    <title>Lotto-Web-App</title>
+    <link rel="stylesheet" href="frontend/style.css">
+</head>
+<body>
+<div id="overlay" class="overlay">
+    <div class="overlay-content">
+        <h2>Willkommen zur Lotto-Web-App</h2>
+        <p>
+            Folge den vier Schritten und lerne das Lotto spielen besser kennen!<br><br>
+            <span class="step">1. Wähle zunächst sechs Zahlen aus.</span> <br>
+            <span class="step">2. Gebe nun optional noch eine Begründung für deine Auswahl im Eingabefeld an.</span> <br>
+            <span class="step">3. Klicke auf das Absendefeld.</span><br>
+            <span class="step">4. Lass dir die entdeckten Muster durch Klicken des Schalters anzeigen!</span><br><br>
+            Du kannst auch jederzeit auf das Fragezeichen klicken, um dir die Anleitung nochmal anzuzeigen.
+        </p>
+
+        <button onclick="hideOverlay()">Weiter</button>
+    </div>
+</div>
+<div id="help" class="hilfe">
+    <div class="hilfe-content">
+        <h2>Anleitung</h2>
+        <p>
+            <span class="step-help">1. Wähle zunächst sechs Zahlen aus.</span> <br>
+            <span class="step-help">2. Gebe optional noch eine Begründung für deine Auswahl im Eingabefeld an.</span> <br>
+            <span class="step-help">3. Klicke auf das Absendefeld.</span><br>
+            <span class="step-help">4. Lass dir die entdeckten Muster durch Klicken des Schalters anzeigen!</span><br><br>
+        </p>
+        <div class="button-container-hilfe">
+            <button onclick="hideHelp()">Weiter</button>
+        </div>
+    </div>
+</div>
+<div id="app" class="container">
+    <div class="title">Lotto</div>
+    <div class="number-input-container">
+        <div class="button-grid">
+            <button
+                    v-for="number in buttonNumbers"
+                    :key="number"
+                    @click="handleButtonClick(number)"
+                    :class="{ 'selected': selectedNumbers.includes(number) }"
+            >
+                {{ number }}
+            </button>
+        </div>
+        <div class="input-grid">
+            <textarea v-model="inputValue" placeholder="Gebe hier eine Begründung für deine Auswahl an..." @input="adjustHeight"></textarea>
+        </div>
+    </div>
+
+
+    <div class="submit-grid">
+        <button @click="submitForm">Absenden</button>
+        <div v-if="showToggle" class="toggle-container">
+            <label class="toggle-switch">
+                <input type="checkbox" v-model="showDict" :disabled="toggleDisabled">
+                <div class="toggle-switch-background">
+                    <div class="toggle-switch-handle"></div>
+                </div>
+            </label>
+            <span class="toggle-text">{{ toggleText }}</span>
+        </div>
+    </div>
+    <div class="message" :class="messageClass" v-if="message">{{ message }}</div>
+    <div class="pattern" v-if="patternMessages.length && showDict">
+        <h3>Erkannte Muster</h3>
+        <ul>
+            <li v-for="(message, index) in patternMessages" :key="index">{{ message }}</li>
+        </ul>
+    </div>
+
+        <button class="request-data-button" @click="showPasswordPrompt" title="Datenbank Download">
+            <img src="frontend/icons/database-download.svg" alt="Download">
+        </button>
+        <button class="help-button" onclick="showHelp()" title="Hilfe">
+            <img src="frontend/icons/help.svg" alt="Hilfe">
+        </button>
+
+</div>
+
+<script src="frontend/vue.js"></script>
+<script type="module" src="frontend/app.js"></script>
+<script>
+    function hideOverlay() {
+        var overlay = document.getElementById("overlay");
+        overlay.style.display = "none";
+    }
+
+    function showOverlay() {
+        var overlay = document.getElementById("overlay");
+        overlay.style.display = "block";
+    }
+
+    function showHelp(){
+        var overlay = document.getElementById("help");
+        overlay.style.display = "block";
+    }
+
+    function hideHelp() {
+        var overlay = document.getElementById("help");
+        overlay.style.display = "none";
+    }
+</script>
+</body>
+</html>
